@@ -12,9 +12,12 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var trueButton: UIButton!
-    @IBOutlet weak var falseButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
+    
+    
+    @IBOutlet weak var button1: UIButton!
+    @IBOutlet weak var button2: UIButton!
+    @IBOutlet weak var button3: UIButton!
     
     var timer = Timer()
     var quizBrain = QuizBrain()
@@ -41,16 +44,18 @@ class ViewController: UIViewController {
         }
         quizBrain.countQuestions()
         
-        
-        
-        
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateUi), userInfo: nil, repeats: false)
     }
     
     @objc func updateUi() {
-        trueButton.backgroundColor = UIColor.clear
-        falseButton.backgroundColor = UIColor.clear
+        button1.backgroundColor = UIColor.clear
+        button2.backgroundColor = UIColor.clear
+        button3.backgroundColor = UIColor.clear
         questionLabel.text = quizBrain.getQuestionText()
+        button1.setTitle(quizBrain.getOptions(index: 0), for: .normal)
+        button2.setTitle(quizBrain.getOptions(index: 1), for: .normal)
+        button3.setTitle(quizBrain.getOptions(index: 2), for: .normal)
+        
         progressBar.progress = quizBrain.progressBar()
         scoreLabel.text = "Score: \(quizBrain.score)/\(quizBrain.questionNumber)"
     }
